@@ -8,7 +8,6 @@
     "moduleResolution": "bundler",
     "allowSyntheticDefaultImports": true,
     "strict": true,
-    "noEmit": false,
     "emitDeclarationOnly": true,
     "outDir": "./dist/types-node"
   },
