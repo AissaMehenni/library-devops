@@ -23,7 +23,7 @@ export default function BooksPage() {
       const data = await listBooks();
       setBooks(data);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Unable to load books');
+      setError(err instanceof Error ? err.message : 'Impossible de charger les livres');
     } finally {
       setLoading(false);
     }
@@ -43,7 +43,7 @@ export default function BooksPage() {
       setAuthor('');
       await refresh();
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Unable to create book');
+      setError(err instanceof Error ? err.message : 'Impossible de créer le livre');
     }
   }
 
@@ -58,7 +58,7 @@ export default function BooksPage() {
       }
       await refresh();
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Unable to update book');
+      setError(err instanceof Error ? err.message : 'Impossible de mettre à jour le livre');
     } finally {
       setPendingId(null);
     }
@@ -71,7 +71,7 @@ export default function BooksPage() {
       await deleteBook(book.id);
       await refresh();
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Unable to delete book');
+      setError(err instanceof Error ? err.message : 'Impossible de supprimer le livre');
     } finally {
       setPendingId(null);
     }
@@ -79,15 +79,15 @@ export default function BooksPage() {
 
   return (
     <section>
-      <h2 className="page__title">Books</h2>
+      <h2 className="page__title">Livres</h2>
 
       {error && <div className="alert alert--error">{error}</div>}
 
       <div className="card">
-        <h3 style={{ marginTop: 0 }}>Add a book</h3>
+        <h3 style={{ marginTop: 0 }}>Ajouter un livre</h3>
         <form className="form" onSubmit={handleCreate}>
           <div className="form__row">
-            <label className="form__label" htmlFor="title">Title</label>
+            <label className="form__label" htmlFor="title">Titre</label>
             <input
               id="title"
               className="form__input"
@@ -97,7 +97,7 @@ export default function BooksPage() {
             />
           </div>
           <div className="form__row">
-            <label className="form__label" htmlFor="author">Author</label>
+            <label className="form__label" htmlFor="author">Auteur</label>
             <input
               id="author"
               className="form__input"
@@ -107,24 +107,24 @@ export default function BooksPage() {
             />
           </div>
           <div>
-            <button type="submit" className="button button--primary">Add</button>
+            <button type="submit" className="button button--primary">Ajouter</button>
           </div>
         </form>
       </div>
 
       {loading ? (
-        <p>Loading books…</p>
+        <p>Chargement des livres…</p>
       ) : books.length === 0 ? (
-        <div className="empty">No books yet — add the first one above.</div>
+        <div className="empty">Aucun livre pour le moment — ajoutez-en un ci-dessus.</div>
       ) : (
         <ul className="list">
           {books.map((book) => (
             <li key={book.id} className="list__item">
               <div className="list__info">
                 <span className="list__title">{book.title}</span>
-                <span className="list__meta">by {book.author}</span>
+                <span className="list__meta">par {book.author}</span>
                 <span className={`badge ${book.available ? 'badge--available' : 'badge--unavailable'}`}>
-                  {book.available ? 'Available' : 'Borrowed'}
+                  {book.available ? 'Disponible' : 'Indisponible'}
                 </span>
               </div>
               <div style={{ display: 'flex', gap: '0.5rem' }}>
@@ -133,14 +133,14 @@ export default function BooksPage() {
                   onClick={() => handleToggle(book)}
                   disabled={pendingId === book.id}
                 >
-                  {book.available ? 'Borrow' : 'Return'}
+                  {book.available ? 'Emprunter' : 'Rendre'}
                 </button>
                 <button
                   className="button button--danger"
                   onClick={() => handleDelete(book)}
                   disabled={pendingId === book.id}
                 >
-                  Delete
+                  Supprimer
                 </button>
               </div>
             </li>

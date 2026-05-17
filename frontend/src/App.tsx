@@ -7,13 +7,13 @@ export default function App() {
   return (
     <div className="app">
       <header className="header">
-        <h1 className="header__title">📚 Library</h1>
+        <h1 className="header__title">📚 Bibliothèque</h1>
         <nav className="nav">
           <NavLink to="/books" className={({ isActive }) => (isActive ? 'nav__link nav__link--active' : 'nav__link')}>
-            Books
+            Livres
           </NavLink>
           <NavLink to="/members" className={({ isActive }) => (isActive ? 'nav__link nav__link--active' : 'nav__link')}>
-            Members
+            Membres
           </NavLink>
         </nav>
       </header>

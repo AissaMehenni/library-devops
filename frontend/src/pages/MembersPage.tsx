@@ -16,7 +16,7 @@ export default function MembersPage() {
       const data = await listMembers();
       setMembers(data);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Unable to load members');
+      setError(err instanceof Error ? err.message : 'Impossible de charger les membres');
     } finally {
       setLoading(false);
     }
@@ -36,7 +36,7 @@ export default function MembersPage() {
       setEmail('');
       await refresh();
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Unable to create member');
+      setError(err instanceof Error ? err.message : 'Impossible de créer le membre');
     }
   }
 
@@ -47,7 +47,7 @@ export default function MembersPage() {
       await deleteMember(member.id);
       await refresh();
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Unable to delete member');
+      setError(err instanceof Error ? err.message : 'Impossible de supprimer le membre');
     } finally {
       setPendingId(null);
     }
@@ -55,15 +55,15 @@ export default function MembersPage() {
 
   return (
     <section>
-      <h2 className="page__title">Members</h2>
+      <h2 className="page__title">Membres</h2>
 
       {error && <div className="alert alert--error">{error}</div>}
 
       <div className="card">
-        <h3 style={{ marginTop: 0 }}>Add a member</h3>
+        <h3 style={{ marginTop: 0 }}>Ajouter un membre</h3>
         <form className="form" onSubmit={handleCreate}>
           <div className="form__row">
-            <label className="form__label" htmlFor="name">Name</label>
+            <label className="form__label" htmlFor="name">Nom</label>
             <input
               id="name"
               className="form__input"
@@ -73,7 +73,7 @@ export default function MembersPage() {
             />
           </div>
           <div className="form__row">
-            <label className="form__label" htmlFor="email">Email</label>
+            <label className="form__label" htmlFor="email">E-mail</label>
             <input
               id="email"
               type="email"
@@ -84,15 +84,15 @@ export default function MembersPage() {
             />
           </div>
           <div>
-            <button type="submit" className="button button--primary">Add member</button>
+            <button type="submit" className="button button--primary">Ajouter un membre</button>
           </div>
         </form>
       </div>
 
       {loading ? (
-        <p>Loading members…</p>
+        <p>Chargement des membres…</p>
       ) : members.length === 0 ? (
-        <div className="empty">No members yet — add the first one above.</div>
+        <div className="empty">Aucun membre pour le moment — ajoutez-en un ci-dessus.</div>
       ) : (
         <ul className="list">
           {members.map((member) => (
@@ -106,7 +106,7 @@ export default function MembersPage() {
                 onClick={() => handleDelete(member)}
                 disabled={pendingId === member.id}
               >
-                Delete
+                Supprimer
               </button>
             </li>
           ))}
