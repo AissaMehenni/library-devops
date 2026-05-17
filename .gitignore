@@ -74,3 +74,13 @@ jacocoHtml/
 
 # Docker
 .docker/
+
+# Node / Vite (frontend)
+node_modules/
+dist/
+.vite/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.eslintcache

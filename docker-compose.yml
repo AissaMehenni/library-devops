@@ -1,6 +1,40 @@
 version: "3.9"
 
 services:
+  db-book:
+    image: postgres:16-alpine
+    container_name: db-book
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: booksdb
+    volumes:
+      - db-book-data:/var/lib/postgresql/data
+    networks:
+      - library-net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d booksdb"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  db-member:
+    image: postgres:16-alpine
+    container_name: db-member
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: membersdb
+    volumes:
+      - db-member-data:/var/lib/postgresql/data
+    networks:
+      - library-net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d membersdb"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
   book-service:
     build:
       context: ./book-service
@@ -10,8 +44,13 @@ services:
     ports:
       - "8081:8081"
     environment:
-      - SPRING_PROFILES_ACTIVE=docker
-      - SERVER_PORT=8081
+      SERVER_PORT: 8081
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db-book:5432/booksdb
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+    depends_on:
+      db-book:
+        condition: service_healthy
     networks:
       - library-net
     healthcheck:
@@ -19,7 +58,7 @@ services:
       interval: 30s
       timeout: 5s
       retries: 5
-      start_period: 20s
+      start_period: 30s
 
   member-service:
     build:
@@ -30,8 +69,13 @@ services:
     ports:
       - "8082:8082"
     environment:
-      - SPRING_PROFILES_ACTIVE=docker
-      - SERVER_PORT=8082
+      SERVER_PORT: 8082
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db-member:5432/membersdb
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+    depends_on:
+      db-member:
+        condition: service_healthy
     networks:
       - library-net
     healthcheck:
@@ -39,8 +83,26 @@ services:
       interval: 30s
       timeout: 5s
       retries: 5
-      start_period: 20s
+      start_period: 30s
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    image: library/frontend:latest
+    container_name: library-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - book-service
+      - member-service
+    networks:
+      - library-net
 
 networks:
   library-net:
     driver: bridge
+
+volumes:
+  db-book-data:
+  db-member-data:
