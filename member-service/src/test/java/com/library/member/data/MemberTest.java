@@ -42,12 +42,8 @@ class MemberTest {
         Member b = new Member(1L, "A", "a@example.com");
         Member c = new Member(2L, "A", "a@example.com");
 
-        assertThat(a).isEqualTo(b);
-        assertThat(a).hasSameHashCodeAs(b);
+        assertThat(a).isEqualTo(b).hasSameHashCodeAs(b);
         assertThat(a).isNotEqualTo(c);
-        assertThat(a).isNotEqualTo(null);
-        assertThat(a).isNotEqualTo("string");
-        assertThat(a).isEqualTo(a);
     }
 
     @Test

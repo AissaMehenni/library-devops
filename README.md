@@ -1,4 +1,4 @@
-# 📚 Library DevOps
+# Library DevOps
 
 [![CI](https://github.com/AissaMehenni/library-devops/actions/workflows/ci.yml/badge.svg)](https://github.com/AissaMehenni/library-devops/actions/workflows/ci.yml)
 [![Java](https://img.shields.io/badge/Java-21-007396?logo=openjdk&logoColor=white)](https://openjdk.org/)
@@ -11,7 +11,7 @@ Application de gestion de bibliothèque construite en architecture **microservic
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
 ```
                          ┌───────────────────────┐
@@ -37,7 +37,7 @@ Chaque microservice possède sa propre base PostgreSQL (pattern *database-per-se
 
 ---
 
-## 🛠️ Stack technique
+## Stack technique
 
 | Couche       | Technologies                                                |
 |--------------|-------------------------------------------------------------|
@@ -51,7 +51,7 @@ Chaque microservice possède sa propre base PostgreSQL (pattern *database-per-se
 
 ---
 
-## 📁 Structure du dépôt
+## Structure du dépôt
 
 ```
 library-devops/
@@ -75,7 +75,7 @@ library-devops/
 
 ---
 
-## 🚀 Lancer le projet en local
+## Lancer le projet en local
 
 **Prérequis :** Docker Desktop (ou Docker Engine + Compose v2).
 
@@ -95,7 +95,7 @@ docker compose down -v
 
 ---
 
-## 🌐 URLs d'accès
+## URLs d'accès
 
 | Service        | URL                       | Description                         |
 |----------------|---------------------------|-------------------------------------|
@@ -105,7 +105,7 @@ docker compose down -v
 
 ---
 
-## 🧪 Lancer les tests
+## Lancer les tests
 
 Les tests utilisent H2 en mémoire — aucune dépendance Docker requise.
 
@@ -129,7 +129,7 @@ Pour vérifier le seuil de couverture (≥ 80 %) :
 
 ---
 
-## ⚙️ Pipeline CI
+## Pipeline CI
 
 Le workflow [`.github/workflows/ci.yml`](.github/workflows/ci.yml) s'exécute sur chaque `push` et `pull_request` :
 
@@ -148,7 +148,7 @@ Les jobs Docker dépendent du succès des tests et du build frontend.
 
 ---
 
-## ✨ Fonctionnalités
+## Fonctionnalités
 
 ### book-service (port 8081)
 
@@ -180,6 +180,6 @@ Les jobs Docker dépendent du succès des tests et du build frontend.
 
 ---
 
-## 📝 Licence
+## Licence
 
 Projet académique — EFREI Paris.

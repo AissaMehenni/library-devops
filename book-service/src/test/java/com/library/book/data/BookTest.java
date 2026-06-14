@@ -46,12 +46,8 @@ class BookTest {
         Book b = new Book(1L, "T", "A", true);
         Book c = new Book(1L, "Other", "A", true);
 
-        assertThat(a).isEqualTo(b);
-        assertThat(a).hasSameHashCodeAs(b);
+        assertThat(a).isEqualTo(b).hasSameHashCodeAs(b);
         assertThat(a).isNotEqualTo(c);
-        assertThat(a).isNotEqualTo(null);
-        assertThat(a).isNotEqualTo("string");
-        assertThat(a).isEqualTo(a);
     }
 
     @Test

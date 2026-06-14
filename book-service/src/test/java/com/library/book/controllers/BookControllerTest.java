@@ -18,7 +18,6 @@ import java.util.List;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.BDDMockito.willDoNothing;
 import static org.mockito.BDDMockito.willThrow;
 import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
@@ -134,8 +133,6 @@ class BookControllerTest {
 
     @Test
     void deleteShouldReturn204() throws Exception {
-        willDoNothing().given(bookService).delete(1L);
-
         mockMvc.perform(delete("/books/1"))
                 .andExpect(status().isNoContent());
 
